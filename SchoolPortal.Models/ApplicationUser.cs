@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SchoolPortal.Models
 {
-    public class ApplicationUser
+    public class ApplicationUser : IdentityUser
     {
         [Required]
         public string FirstName { get; set; }

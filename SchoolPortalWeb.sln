@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolPortalWeb", "SchoolPortalWeb\SchoolPortalWeb.csproj", "{D47FCEA3-8E9D-43AE-B791-082563E92B20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolPortalWeb", "SchoolPortalWeb\SchoolPortalWeb.csproj", "{D47FCEA3-8E9D-43AE-B791-082563E92B20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolPortal.DataAccess", "SchoolPortal.DataAccess\SchoolPortal.DataAccess.csproj", "{552BCFBB-5398-4EC2-A013-A8DF5F0E959F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolPortal.DataAccess", "SchoolPortal.DataAccess\SchoolPortal.DataAccess.csproj", "{552BCFBB-5398-4EC2-A013-A8DF5F0E959F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolPortal.Models", "SchoolPortal.Models\SchoolPortal.Models.csproj", "{6F83E6F7-3F74-45AA-8CFD-6D5A79A65A11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolPortal.Models", "SchoolPortal.Models\SchoolPortal.Models.csproj", "{6F83E6F7-3F74-45AA-8CFD-6D5A79A65A11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolPortal.Utility", "SchoolPortal.Utility\SchoolPortal.Utility.csproj", "{DF36CC13-E1B9-43F8-92FB-4999ED6BC839}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{6F83E6F7-3F74-45AA-8CFD-6D5A79A65A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F83E6F7-3F74-45AA-8CFD-6D5A79A65A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F83E6F7-3F74-45AA-8CFD-6D5A79A65A11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF36CC13-E1B9-43F8-92FB-4999ED6BC839}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF36CC13-E1B9-43F8-92FB-4999ED6BC839}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF36CC13-E1B9-43F8-92FB-4999ED6BC839}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF36CC13-E1B9-43F8-92FB-4999ED6BC839}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,6 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SchoolPortal.Models\SchoolPortal.Models.csproj" />
+    <ProjectReference Include="..\SchoolPortal.Utility\SchoolPortal.Utility.csproj" />
   </ItemGroup>
 
 </Project>
