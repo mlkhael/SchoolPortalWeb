@@ -5,7 +5,7 @@
 namespace SchoolPortal.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class test : Migration
+    public partial class initialv2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -57,10 +57,36 @@ namespace SchoolPortal.DataAccess.DbInitializer
                     FirstName = "Admin",
                     LastName = "Admin",
                     YearEnrolled = 1000
-                }, "Password_123").GetAwaiter().GetResult();
+                }, "Password@123").GetAwaiter().GetResult();
 
                 ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@studentportal.com");
                 _userManager.AddToRoleAsync(user, StaticDetails.Role_Admin).GetAwaiter().GetResult();
+
+                //create teacher
+                _userManager.CreateAsync(new ApplicationUser
+                {
+                    UserName = "teacher@studentportal.com",
+                    Email = "teacher@studentportal.com",
+                    FirstName = "Mr",
+                    LastName = "Teacher",
+                    YearEnrolled = 1000
+                }, "Password@123").GetAwaiter().GetResult();
+
+                 user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "teacher@studentportal.com");
+                _userManager.AddToRoleAsync(user, StaticDetails.Role_Teacher).GetAwaiter().GetResult();
+
+                //create student
+                _userManager.CreateAsync(new ApplicationUser
+                {
+                    UserName = "student@studentportal.com",
+                    Email = "student@studentportal.com",
+                    FirstName = "Mr",
+                    LastName = "Student",
+                    YearEnrolled = 1000
+                }, "Password@123").GetAwaiter().GetResult();
+
+                user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@studentportal.com");
+                _userManager.AddToRoleAsync(user, StaticDetails.Role_Student).GetAwaiter().GetResult();
             }
 
             return;

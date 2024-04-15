@@ -2,8 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolPortal.Models;
 using System.Diagnostics;
 
-namespace SchoolPortalWeb.Controllers
+namespace SchoolPortalWeb.Areas.Student.Controllers
 {
+    [Area("Student")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

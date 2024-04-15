@@ -22,4 +22,8 @@
     <ProjectReference Include="..\SchoolPortal.Models\SchoolPortal.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Views\GradeManager\" />
+  </ItemGroup>
+
 </Project>
