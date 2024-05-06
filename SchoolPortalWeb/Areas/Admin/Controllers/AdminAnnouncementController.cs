@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Constraints;
 using SchoolPortal.DataAccess.Repository.IRepository;
 using SchoolPortal.Models;
 using SchoolPortal.Models.ViewModels;
@@ -19,22 +20,23 @@ namespace SchoolPortalWeb.Areas.Admin.Controllers
         {
             _unitOfWork = unitOfWork;
             _webHostEnvironment = webHostEnvironment;
+            
         }
 
-        public IActionResult Index()
+        public IActionResult IndexCreate()
         {
             AdminAnnouncementVM vm = new AdminAnnouncementVM();
             vm.AdminAnnouncement = new AdminAnnouncement();
 
-            vm.AdminAnnouncement.ApplicationUserId = GetUserId();
-            vm.Posts = _unitOfWork.AdminAnnouncement.GetAll(includeProperties: "ApplicationUser")
+            vm.AdminAnnouncement.ApplicationUserId = _unitOfWork.GetUserId(User);
+            vm.Posts = _unitOfWork.AdminAnnouncement.GetAll(includeProperties: "ApplicationUser , AdminAnnouncementFiles")
                 .OrderByDescending(u => u.DatePosted).ToList();
 
             return View(vm);
         }
 
         [HttpPost] //Create Post
-        public IActionResult Index(AdminAnnouncement adminAnnouncement)
+        public IActionResult IndexCreate(AdminAnnouncement adminAnnouncement, List<IFormFile> files)
         {
             if (ModelState.IsValid)
             {
@@ -42,9 +44,41 @@ namespace SchoolPortalWeb.Areas.Admin.Controllers
 
                 _unitOfWork.AdminAnnouncement.Add(adminAnnouncement);
                 _unitOfWork.Save();
+
+                if (files != null)
+                {
+                    foreach (IFormFile file in files)
+                    {
+                        string fileName = file.FileName.Replace(" ", "_");
+                        string announcementPath = @"files\announcements\announcement-" + adminAnnouncement.Id;
+                        string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, announcementPath);
+
+                        if (!Directory.Exists(finalPath))
+                            Directory.CreateDirectory(finalPath);
+
+                        using (var fileStream = new FileStream(Path.Combine(finalPath, fileName), FileMode.Create))
+                        {
+                            file.CopyTo(fileStream);
+                        }
+
+                        AdminAnnouncementFiles adminAnnouncementfiles = new AdminAnnouncementFiles()
+                        {
+                            FileUrl = @"\" + announcementPath + @"\" +fileName,
+                            AdminAnnouncementId = adminAnnouncement.Id,
+                        };
+
+                        if (adminAnnouncement.AdminAnnouncementFiles == null)
+                            adminAnnouncement.AdminAnnouncementFiles = new List<AdminAnnouncementFiles>();
+
+                        adminAnnouncement.AdminAnnouncementFiles.Add(adminAnnouncementfiles);
+                    }    
+
+                   _unitOfWork.AdminAnnouncement.Update(adminAnnouncement);
+                   _unitOfWork.Save();
+                }
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexCreate");
         }
 
         public IActionResult Edit(int? id)
@@ -78,7 +112,7 @@ namespace SchoolPortalWeb.Areas.Admin.Controllers
                 _unitOfWork.AdminAnnouncement.Update(adminAnnouncement);
                 _unitOfWork.Save();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("IndexCreate");
             }
             return View(adminAnnouncement.Id);
         }
@@ -90,8 +124,24 @@ namespace SchoolPortalWeb.Areas.Admin.Controllers
 
             if (adminAnnouncement != null)
             {
+                string announcementPath = @"files\announcements\announcement-" + adminAnnouncement.Id;
+                string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, announcementPath);
+
+                if (Directory.Exists(finalPath)) {
+                    string[] targetPaths = Directory.GetFiles(finalPath);
+
+                    foreach (string targetPath in targetPaths) 
+                    {
+                        System.IO.File.Delete(targetPath);
+                    }
+
+                    Directory.Delete(finalPath);
+                
+                }
+
                 _unitOfWork.AdminAnnouncement.Remove(adminAnnouncement);
                 _unitOfWork.Save();
+
                 return Json("Announcement Deleted Successfully");
             }
 
@@ -99,15 +149,23 @@ namespace SchoolPortalWeb.Areas.Admin.Controllers
             return Json("Error deleting announcement.");
 
         }
-
-        public string GetUserId()
+/*
+        [HttpGet]
+        public IActionResult DownloadFile(string filePath)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            return userId;
+            if (!System.IO.File.Exists(filePath))
+                return NotFound(); // or some appropriate error handling
+
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filePath, FileMode.Open))
+            {
+                stream.CopyTo(memory);
+            }
+            memory.Position = 0;
+
+            return File(memory, "application/octet-stream", Path.GetFileName(filePath));
         }
-
-
+*/
     }
 }

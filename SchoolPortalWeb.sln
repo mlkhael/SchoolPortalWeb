@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolPortal.DataAccess", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolPortal.Models", "SchoolPortal.Models\SchoolPortal.Models.csproj", "{6F83E6F7-3F74-45AA-8CFD-6D5A79A65A11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolPortal.Utility", "SchoolPortal.Utility\SchoolPortal.Utility.csproj", "{DF36CC13-E1B9-43F8-92FB-4999ED6BC839}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolPortal.Utility", "SchoolPortal.Utility\SchoolPortal.Utility.csproj", "{DF36CC13-E1B9-43F8-92FB-4999ED6BC839}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

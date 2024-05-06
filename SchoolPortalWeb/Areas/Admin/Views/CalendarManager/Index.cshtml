@@ -1,0 +1,36 @@
+﻿@model List<CalendarManager>
+
+<h3 class="text-center">Calendar Event Manager</h3>
+<a class="col-2 btn btn-primary mb-3" asp-area="Admin" asp-controller="CalendarManager" asp-action="CreateEdit">Create new event</a>
+<a class="col-2 btn btn-primary mb-3" asp-area="Admin" asp-controller="CalendarManager" asp-action="Calendar">Visual Calendar</a>
+
+<table class="table">
+    <tr>
+        @*   <th scope="col">ID</th> *@
+        <th scope="col">Id</th>
+        <th scope="col">Event Title</th>
+        <th scope="col">Event Start Date</th>
+        <th scope="col">Event End Date</th>
+        <th scope="col">All Day Event</th>
+        <th scope="col">Actions</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            @*   <th scope="col">ID</th> *@
+            <td scope="col">@x.Id</td>
+            <td scope="col">@x.Title</td>
+            <td scope="col">@x.StartDate</td>
+            <td scope="col">@x.EndDate</td>
+            <td scope="col">@x.isAllDay</td>
+            <td scope="col">
+                <a asp-area="Admin" asp-controller="CalendarManager" asp-action="CreateEdit" asp-route-id="@x.Id" class="btn btn-sm btn-primary mx-1">Edit</a>
+                <a class="btn btn-sm btn-danger mx-1" onclick="deleteEvent(this.id)" id="@x.Id">Delete</a>
+            </td>
+
+        </tr>
+    }
+</table>
+
+
+<script src="~/js/calendarManager.js"></script>

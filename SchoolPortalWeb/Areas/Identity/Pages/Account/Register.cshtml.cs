@@ -6,9 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -44,7 +47,7 @@ namespace SchoolPortalWeb.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            
+
             RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
@@ -109,9 +112,12 @@ namespace SchoolPortalWeb.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Serial Number")]
+            public string UserName { get; set; } //Serial Number
 
-            [Required(ErrorMessage = "UserName cannot be blank.")]
-            public string UserName { get; set; }
+
             [Required(ErrorMessage = "First Name cannot be blank.")]
             public string FirstName { get; set; }
             [Required(ErrorMessage = "Last Name cannot be blank.")]
@@ -119,10 +125,17 @@ namespace SchoolPortalWeb.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "Year Enrolled cannot be blank.")]
             public int YearEnrolled { get; set; }
             [Required(ErrorMessage = "Last Name cannot be blank.")]
+
+            public string Rank { get; set; }
             public string? Role { get; set; }
+            public string? BranchOfService { get; set; }
 
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> BranchOfServiceList { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> RankList { get; set; }
         }
 
 
@@ -130,15 +143,43 @@ namespace SchoolPortalWeb.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-/*
+
+            FieldInfo[] allStaticDetails = typeof(StaticDetails).GetFields(BindingFlags.Public | BindingFlags.Static);
+
+            List<string> BranchOfServices = new();
+            List<string> Ranks = new();
+
+            foreach (var u in allStaticDetails)
+            {
+                if (u.Name.StartsWith("BranchOfService_") && u.FieldType == typeof(string))
+                {
+                    BranchOfServices.Add((string)u.GetValue(null));
+                }
+                if (u.Name.StartsWith("Rank_") && u.FieldType == typeof(string))
+                {
+                    Ranks.Add((string)u.GetValue(null));
+                }
+            }
+
             Input = new()
             {
                 RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
                 {
                     Text = i,
                     Value = i
-                })
-            };*/
+                }),
+
+                BranchOfServiceList = BranchOfServices.Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i,
+                }),
+                RankList = Ranks.Select(i => new SelectListItem
+                {
+                    Text = i,
+                    Value = i,
+                }),
+            };
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -154,6 +195,10 @@ namespace SchoolPortalWeb.Areas.Identity.Pages.Account
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.YearEnrolled = Input.YearEnrolled;
+
+                //Need validation
+                user.BranchOfService = Input.BranchOfService;
+                user.Rank = Input.Rank;
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
@@ -196,6 +241,8 @@ namespace SchoolPortalWeb.Areas.Identity.Pages.Account
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
+
+                    OnGetAsync(); //TESTING
                 }
             }
 

@@ -24,8 +24,12 @@ namespace SchoolPortal.Models
         public DateTime DateEditted { get; set; }
         [Required]
         public string ApplicationUserId { get; set; }
+        //public string? FileUrl { get; set; }
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
+
+        [ValidateNever]
+        public List<AdminAnnouncementFiles> AdminAnnouncementFiles { get; set; }
     }
 }

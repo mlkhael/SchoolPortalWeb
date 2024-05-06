@@ -13,7 +13,9 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     }
 
     public DbSet<AdminAnnouncement> AdminAnnouncements { get; set; }
+    public DbSet<AdminAnnouncementFiles> AdminAnnouncementFiles { get; set; }
     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+    public DbSet<CalendarManager> CalendarManager { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

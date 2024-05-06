@@ -265,15 +265,71 @@ namespace SchoolPortal.DataAccess.Migrations
                     b.ToTable("AdminAnnouncements");
                 });
 
+            modelBuilder.Entity("SchoolPortal.Models.AdminAnnouncementFiles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AdminAnnouncementId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FileUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdminAnnouncementId");
+
+                    b.ToTable("AdminAnnouncementFiles");
+                });
+
+            modelBuilder.Entity("SchoolPortal.Models.CalendarManager", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isAllDay")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CalendarManager");
+                });
+
             modelBuilder.Entity("SchoolPortal.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("BranchOfService")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rank")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -343,6 +399,22 @@ namespace SchoolPortal.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("SchoolPortal.Models.AdminAnnouncementFiles", b =>
+                {
+                    b.HasOne("SchoolPortal.Models.AdminAnnouncement", "AdminAnnouncement")
+                        .WithMany("AdminAnnouncementFiles")
+                        .HasForeignKey("AdminAnnouncementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AdminAnnouncement");
+                });
+
+            modelBuilder.Entity("SchoolPortal.Models.AdminAnnouncement", b =>
+                {
+                    b.Navigation("AdminAnnouncementFiles");
                 });
 #pragma warning restore 612, 618
         }

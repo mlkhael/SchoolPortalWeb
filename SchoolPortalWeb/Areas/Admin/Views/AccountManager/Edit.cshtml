@@ -1,0 +1,77 @@
+﻿@model SchoolPortal.Models.ViewModels.ApplicationUserVM
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <form method="post" class="form-control">
+        <h2>Create a new account.</h2>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+        <div class="form-floating mb-3 col-md-12">
+            <input asp-for="ApplicationUsers.Email" class="form-control" aria-required="true" placeholder="name@example.com" />
+            <label asp-for="ApplicationUsers.Email" class="ms-2 text-muted">Email</label>
+            <span asp-validation-for="ApplicationUsers.Email" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-floating mb-3 ">
+                    <input asp-for="ApplicationUsers.FirstName" class="form-control" placeholder="" />
+                    <label asp-for="ApplicationUsers.FirstName" class="ms-2 text-muted">First Name</label>
+                    <span asp-validation-for="ApplicationUsers.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="ApplicationUsers.LastName" class="form-control" placeholder="" />
+                    <label asp-for="ApplicationUsers.LastName" class="ms-2 text-muted">Last Name</label>
+                    <span asp-validation-for="ApplicationUsers.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="ApplicationUsers.UserName" class="form-control" placeholder="" />
+                    <label asp-for="ApplicationUsers.UserName" class="ms-2 text-muted">Serial Number</label>
+                    <span asp-validation-for="ApplicationUsers.UserName" class="text-danger"></span>
+                </div>
+
+                 <div class="form-floating mb-3">
+                    <select asp-for="ApplicationUsers.Role" asp-items="@Model.RoleList" class="form-select">
+                        <option disabled>-Select Role-</option>
+                    </select>
+                    <label asp-for="ApplicationUsers.Role" class="ms-2 text-muted">Account Role</label>
+                </div> 
+            </div>
+            <div class="col">
+                
+                <div class="form-floating mb-3 row">
+                    <div class="form-floating col">
+
+                        <input asp-for="ApplicationUsers.YearEnrolled" class="form-control" value="2024" />
+                        <label asp-for="ApplicationUsers.YearEnrolled" class="ms-2 text-muted">Year Enrolled</label>
+                        <span asp-validation-for="ApplicationUsers.YearEnrolled" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating col">
+                        <select asp-for="ApplicationUsers.BranchOfService" asp-items="@Model.BranchOfServiceList" class="form-select">
+                            <option disabled selected>-Select Branch of Service-</option>
+
+                        </select>
+                        <label asp-for="ApplicationUsers.BranchOfService" class="ms-2 text-muted">Branch of Service</label>
+                    </div> 
+
+                </div>
+                 <div class="form-floating mb-3">
+                    <select asp-for="ApplicationUsers.Rank" asp-items="@Model.RankList" class=" form-select">
+                        <option disabled selected>-Select Rank-</option>
+                    </select>
+                    <label asp-for="ApplicationUsers.Rank" class="ms-2 text-muted">Rank</label>
+                </div> 
+                <div class="form-floating mb-3 ">
+                    <input hidden asp-for="ApplicationUsers.Id" class="form-control" placeholder="" />
+                </div>
+            </div>
+        </div>
+
+
+        <button type="submit" class="w-100 btn btn-lg btn-primary">Edit User</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

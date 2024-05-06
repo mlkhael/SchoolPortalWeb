@@ -1,8 +1,71 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model SchoolPortal.Models.ViewModels.AdminAnnouncementVM
+<script src='~/lib/jquery/dist/jquery.min.js'></script>
+<script src='~/lib/fullcalendar/index.global.min.js'></script>
+<script src='~/js/fullcalendar.js'></script>
+<div class="row mx-3">
+    <div class="col justify-content-center">
+        <div class="border border-1 rounded p-3">
+            <h4 class=" mb-3">Announcements</h4>
+            @if (@Model.Posts.Count() == 0)
+            {
+                <h4 class="m-lg-5 text-center">No Posts Recorded</h4>
+            }
+            else
+            {
+                foreach (var u in Model.Posts)
+                {
+                    <div class="border border-1 rounded p-3 m-3">
+                        <div class="d-flex flex-row ">
+                            <div class="h4">@u.Title</div>
+                            <div class="col px-4 text-secondary m-0">
+                                @if (@u.IsEditted != true)
+                                {
+                                    @u.DatePosted.ToString("dddd, dd MMMM yyyy")
+                                }
+                                else
+                                {
+                                    <span>@u.DatePosted.ToString("dddd, dd MMMM yyyy") Edited: (@u.DateEditted.ToString("dddd, dd MMMM yyyy"))</span>
+                                }
+                            </div>
+                        </div>
+                        <div>@u.Description</div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+                        <div>
+                            @if (u.AdminAnnouncementFiles.Count != 0)
+                            {
+                                <span>Files Included:</span>
+                                @foreach (var file in u.AdminAnnouncementFiles)
+                                {
+
+                                    <div>
+
+
+                                        <a href=@file.FileUrl>
+                                            @file.FileUrl.Replace("\\files\\announcements\\announcement-" + @u.Id + "\\", "")
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <div class="text-end">
+                            - @u.ApplicationUser.FirstName @u.ApplicationUser.LastName
+                        </div>
+                    </div>
+                }
+
+            }
+
+        </div>
+    </div>
+    <div class="col-5">
+        <div id="calendar"></div>
+        <div class="text-end m-2">
+            <a asp-area="Admin" asp-controller="CalendarManager" asp-action="Calendar">
+                < Full View Calendar
+            </a>
+        </div>
+    </div>
 </div>

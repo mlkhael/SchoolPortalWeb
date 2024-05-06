@@ -44,7 +44,20 @@ namespace SchoolPortal.DataAccess.Repository
             {
                 foreach (var property in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query = query.Include(property);
+                    //query = query.Include(property);
+
+                    var trimmedProperty = property.Trim();
+
+                    // Include the property only if it exists in T
+                    if (typeof(T).GetProperty(trimmedProperty) != null)
+                    {
+                        query = query.Include(trimmedProperty);
+                    }
+                    else
+                    {
+                        // Handle the case where the property doesn't exist in T
+                        throw new InvalidOperationException($"The property '{trimmedProperty}' does not exist in type '{typeof(T)}'.");
+                    }
                 }
             }
             return query.ToList();

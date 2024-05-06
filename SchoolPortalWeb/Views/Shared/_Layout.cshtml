@@ -1,4 +1,6 @@
 ﻿<!DOCTYPE html>
+
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,7 +14,11 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SchoolPortalWeb</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                   
+                    <img src="~/files/images/logo.jpg" style="width:50px" />
+                </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,28 +28,32 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Student" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Student" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a href="" class="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown">Content Management</a>
 
-                            <ul class="dropdown-menu">
-                                <li class="nav-item" >
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="AdminAnnouncement" asp-action="Index">Announcement Manager</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="AccountManager" asp-action="StudentList">User Account Manager</a>
-                                </li>
-                            </ul>
-                        </li>
+                        @if (!User.IsInRole("Student") && User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown">
+                                <a href="" class="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown">Content Management</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="AdminAnnouncement" asp-action="IndexCreate">Announcement Manager</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="CalendarManager" asp-action="Index">Calendar Event Manager</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="AccountManager" asp-action="StudentList">User Account Manager</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

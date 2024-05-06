@@ -18,11 +18,30 @@
         </div>
         <div class="row">
             <div class="col">
+                <div class="form-floating mb-3 ">
+                    <input asp-for="Input.FirstName" class="form-control" placeholder="" />
+                    <label asp-for="Input.FirstName" class="ms-2 text-muted">First Name</label>
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
                 <div class="form-floating mb-3">
-                    <input asp-for="Input.UserName" class="form-control" placeholder="username" />
-                    <label asp-for="Input.UserName" class="ms-2 text-muted">Username</label>
+                    <input asp-for="Input.LastName" class="form-control" placeholder="" />
+                    <label asp-for="Input.LastName" class="ms-2 text-muted">Last Name</label>
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.UserName" class="form-control" placeholder="" />
+                    <label asp-for="Input.UserName" class="ms-2 text-muted">Serial Number</label>
                     <span asp-validation-for="Input.UserName" class="text-danger"></span>
                 </div>
+
+                <div class="form-floating mb-3">
+                    <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                        <option disabled selected>-Select Role-</option>
+                    </select>
+                    <label asp-for="Input.Role" class="ms-2 text-muted">Account Role</label>
+                </div>
+            </div>
+            <div class="col">
                 <div class="form-floating mb-3 ">
                     <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
                     <label asp-for="Input.Password" class="ms-2 text-muted">Password</label>
@@ -33,31 +52,27 @@
                     <label asp-for="Input.ConfirmPassword" class="ms-2 text-muted">Confirm Password</label>
                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                 </div>
+                <div class="form-floating mb-3 row">
+                    <div class="form-floating col">
+                        
+                        <input asp-for="Input.YearEnrolled" class="form-control" value="2024" />
+                        <label asp-for="Input.YearEnrolled" class="ms-2 text-muted">Year Enrolled</label>
+                        <span asp-validation-for="Input.YearEnrolled" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating col">
+                        <select asp-for="Input.BranchOfService" asp-items="@Model.Input.BranchOfServiceList" class="form-select">
+                            <option disabled selected>-Select Branch of Service-</option>
+                            
+                        </select>
+                        <label asp-for="Input.BranchOfService" class="ms-2 text-muted">Branch of Service</label>
+                    </div>
+                  
+                </div>
                 <div class="form-floating mb-3">
-                    <select asp-for="Input.Role" class="form-select">
-                        <option disabled selected>-Select Role-</option>
-                        <option>Student</option>
-                        <option>Teacher</option>
-                        <option>Admin</option>
+                    <select asp-for="Input.Rank" asp-items="@Model.Input.RankList" class=" form-select">
+                        <option disabled selected>-Select Rank-</option>
                     </select>
-                </div>
-            </div>
-            <div class="col">
-
-                <div class="form-floating mb-3 ">
-                    <input asp-for="Input.FirstName" class="form-control" />
-                    <label asp-for="Input.FirstName" class="ms-2 text-muted">First Name</label>
-                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.LastName" class="form-control" />
-                    <label asp-for="Input.LastName" class="ms-2 text-muted">Last Name</label>
-                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="Input.YearEnrolled" class="form-control" value="2024" />
-                    <label asp-for="Input.YearEnrolled" class="ms-2 text-muted">Year Enrolled</label>
-                    <span asp-validation-for="Input.YearEnrolled" class="text-danger"></span>
+                    <label asp-for="Input.Rank" class="ms-2 text-muted">Rank</label>
                 </div>
             </div>
         </div>

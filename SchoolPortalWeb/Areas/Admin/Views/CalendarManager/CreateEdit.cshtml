@@ -1,0 +1,49 @@
+﻿@model SchoolPortal.Models.CalendarManager
+
+<h3 class="text-center"> @(Model.Id == 0?"Create Event": "Edit Event")</h3>
+<a class="col-2 btn btn-secondary mb-3" asp-area="Admin" asp-controller="CalendarManager" asp-action="Index">Return to List</a>
+
+<div class="d-flex justify-content-center">
+    <div class="border border-1 rounded p-3 col-10">
+        <p class=" mb-3"> @(Model.Id == 0 ? "Create New Event" : "Edit Event")</p>
+        <form method="post" class="form-control">
+            <div class="row">
+                <label>Event Title:</label>
+                <input asp-for="Title" class="form-control my-2 mx-3 w-75" placeholder="Event Title" />
+                <span class="text-danger"></span>
+
+                <div class="col">
+                    <label>Start Date:</label>
+                    <input asp-for="StartDate" class="form-control my-2 w-50" type="datetime-local" />
+
+                    <label>End Date:</label>
+                    <input asp-for="EndDate" class="form-control my-2 w-50" type="datetime-local"/>
+                </div>
+
+
+                <div class="col mt-4"> 
+                    Info:
+                    <ul class="text-secondary">
+                        <li>
+                            Setting Start and End dates to the same value will make the event span for the whole day.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <span class="text-danger"></span>
+
+            <div class="row my-2">
+                <div class="col row justify-content-end">
+                    <div class="col-3"><button class="form-control btn btn-primary">Post</button></div>
+                    <div class="col-3"><span href="" onclick="clearInputs()" class="form-control btn btn-danger">Clear</span></div>
+                </div>
+            </div>
+
+
+            <input asp-for="Id" class="form-control mt-3" placeholder="ID" style="width: 100px;" />
+        </form>
+    </div>
+</div>

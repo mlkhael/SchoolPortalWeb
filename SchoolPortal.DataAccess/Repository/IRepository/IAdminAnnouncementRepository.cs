@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SchoolPortal.DataAccess.Repository.IRepository
 {
-    public interface IAdminAnnouncementRepository : IRepository<AdminAnnouncement>
+    public interface ICalendarManagerRepository : IRepository<CalendarManager>
     {
-        void Update(AdminAnnouncement obj);
+        void Update(CalendarManager obj);
     }
 }

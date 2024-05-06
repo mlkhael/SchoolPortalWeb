@@ -1,0 +1,45 @@
+Teachers and Admins will find managing students very easy and straightforward.
+For students they will they will rarely have to navigate away from the homepage as it has the common features already present in the homepage.
+=================
+
+The student portal is built with ease of use in mind which should make navigation straightfoward. However, the calendar feature requires the user to read the given instructions. Failing to take note of this could lead to unwanted inputs in the calendar.
+====================
+
+User-Friendly, scalable, reliable, secure.
+The website primarily focuses on being user friendly as various age groups will be using the website, from teachers to students with various degrees of computer literacy.
+
+SQL allows for tables to be added on the database which allows for more features that require data-entry to be added to the site.
+
+Reliable and secure user registration and logins are scaffolded and provided by Microsoft, user passwords are encrypted which keeps them safe if the database is tampered.
+=================
+
+Student portal is not customizable.
+This is intentional if in case a user finds navigating the site difficult, teachers/admins or support staffs can provide assistance as the design is uniform for all users.
+
+==============
+
+The student portal is capable of using Javascript and can support scorm courses for future expansions
+
+=======
+
+The website is straightforward and should allow users of various ages to use the site without any confusion. 
+
+Users should be able use the site with little to no assistance.
+
+=========
+
+Users are only required basic english and basic computer literacy for navigating and making the most of the site. I.E: downloading photos and pdfs will require users to right-click > save
+
+====
+
+Currently, the website allows for teachers and admins to create announcements and attach files for sharing, this includes common file types such as documents and pdfs to media files such as videos and photos.
+
+=====
+
+User credentials are stored using SQL, account passwords are encrypted by Microsoft's login/registration feature (ASP.net identity), Which is integrated in the site. This makes tampering the accounts very hard despite having access to the database.
+
+Security can also be enhanced by using trusted hardware and proper handling of sensitive hardware.
+
+========== 
+
+Currently, The student portal is capable of file sharing but uploading sensitive data to the site can allow students to have access to administrative documents uploaded to the website.

@@ -56,8 +56,10 @@ namespace SchoolPortal.DataAccess.DbInitializer
                     Email = "admin@studentportal.com",
                     FirstName = "Admin",
                     LastName = "Admin",
+                    BranchOfService = "PAF",
+                    Rank = "Colonel (COL)",
                     YearEnrolled = 1000
-                }, "Password@123").GetAwaiter().GetResult();
+                }, "Password_123").GetAwaiter().GetResult();
 
                 ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "admin@studentportal.com");
                 _userManager.AddToRoleAsync(user, StaticDetails.Role_Admin).GetAwaiter().GetResult();
@@ -65,12 +67,14 @@ namespace SchoolPortal.DataAccess.DbInitializer
                 //create teacher
                 _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = "teacher@studentportal.com",
+                    UserName = "teacher001",
                     Email = "teacher@studentportal.com",
-                    FirstName = "Mr",
+                    FirstName = "Test",
                     LastName = "Teacher",
+                    BranchOfService = "PAF",
+                    Rank = "Colonel (COL)",
                     YearEnrolled = 1000
-                }, "Password@123").GetAwaiter().GetResult();
+                }, "Password_123").GetAwaiter().GetResult();
 
                  user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "teacher@studentportal.com");
                 _userManager.AddToRoleAsync(user, StaticDetails.Role_Teacher).GetAwaiter().GetResult();
@@ -78,12 +82,14 @@ namespace SchoolPortal.DataAccess.DbInitializer
                 //create student
                 _userManager.CreateAsync(new ApplicationUser
                 {
-                    UserName = "student@studentportal.com",
+                    UserName = "O-23465",
                     Email = "student@studentportal.com",
-                    FirstName = "Mr",
+                    FirstName = "Test",
                     LastName = "Student",
+                    BranchOfService = "PAF",
+                    Rank = "1st Lieutenant (1LT)",
                     YearEnrolled = 1000
-                }, "Password@123").GetAwaiter().GetResult();
+                }, "Password_123").GetAwaiter().GetResult();
 
                 user = _db.ApplicationUsers.FirstOrDefault(u => u.Email == "student@studentportal.com");
                 _userManager.AddToRoleAsync(user, StaticDetails.Role_Student).GetAwaiter().GetResult();

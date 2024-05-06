@@ -19,5 +19,10 @@ namespace SchoolPortal.Models
         public int YearEnrolled { get; set; }
         [NotMapped]
         public string Role { get; set; }
+        [Required]
+        public string BranchOfService { get; set; }
+        [Required]
+        public string Rank { get; set; }
+
     }
 }
